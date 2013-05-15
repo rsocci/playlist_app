@@ -1,5 +1,9 @@
 <h1>List of Playlists</h1>
 
 <% @playlists.each do |playlist| %>
-	<h2><%= playlist.link %></h2>
+	<h2><%= link_to playlist.link, playlist %></h2>
+	<p><%= link_to "Delete", playlist, method: :delete, data: { confirm: 'Are you sure?'} %> </p>
+	<hr>
 <% end %>
+
+<%= link_to "Create New Playlist", new_playlist_path %>

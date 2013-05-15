@@ -1,4 +1,9 @@
 class PlaylistsController < ApplicationController
+	before_filter :get_playlist, only: [:show, :edit, :update, :destroy]
+
+	def get_playlist
+		@playlist = Playlist.find(params[:id])
+	end
 
 	def index
 		@playlists = Playlist.all
@@ -6,7 +11,7 @@ class PlaylistsController < ApplicationController
 
 
 	def show
-		@playlist = Playlist.find(params[:id])
+		
 	end
 
 
@@ -28,12 +33,11 @@ class PlaylistsController < ApplicationController
 
 
 	def edit
-		@playlist = Playlist.find(params[:id])
+		
 	end
 
 
 	def update
-		@playlist = Playlist.find(params[:id])
 		if @playlist.update_attributes(params[:playlist])
 			redirect_to playlists_path, :notice => "Playlist has been updated"
 		else
@@ -43,7 +47,6 @@ class PlaylistsController < ApplicationController
 
 
 	def destroy
-		@playlist = Playlist.find(params[:id])
 		@playlist.destroy
 		redirect_to playlists_path, :notice => "Playlist has been deleted"
 	end
