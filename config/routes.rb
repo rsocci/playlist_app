@@ -1,5 +1,6 @@
 PlaylistApp::Application.routes.draw do
   resources :users
+  resources :playlists
 
   root :to  => "users#index"
   # The priority is based upon order of creation:
