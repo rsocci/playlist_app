@@ -1,7 +1,8 @@
 <h1>List of Playlists</h1>
 
 <% @playlists.each do |playlist| %>
-	<h2><%= link_to playlist.link, playlist %></h2>
+	<h3><%= link_to playlist.title, playlist %> </h3> 
+	<p>Submitted <%= time_ago_in_words(playlist.created_at) + " ago" %> </p>
 	<p><%= link_to "Delete", playlist, method: :delete, data: { confirm: 'Are you sure?'} %> </p>
 	<hr>
 <% end %>

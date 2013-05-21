@@ -2,8 +2,8 @@
 	<% if @user.errors.any? %>
 		<h2>Errors:</h2>
 		<ul>
-			<% @user.errors.full_messages.each do |message| %>
-			<li><%= message %></li>
+			<% @user.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
 			<% end %>
 		</ul>
 	<% end %>
@@ -27,6 +27,5 @@
 		<%= f.label :password_confirmation %> <br>
 		<%= f.password_field :password_confirmation %>
 	</p>
-
-	<p><%= f.submit "Update User" %></p>
+	<p><%= f.submit "Submit" %></p>
 <% end %>

@@ -11,8 +11,16 @@
 	<% end %>
 
 	<p>
+		<%= f.label :title %><br>
+		<%= f.text_field :title %>
+	</p>
+	<p>
 		<%= f.label :link %><br>
 		<%= f.text_field :link %>
+	</p>
+	<p>
+		<%= f.label :user_id %><br>
+		<%= collection_select(:playlist, :user_id, User.all, :id, :full_name) %>
 	</p>
 	<p><%= f.submit "Create" %></p>
 

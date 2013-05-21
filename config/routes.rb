@@ -1,8 +1,12 @@
 PlaylistApp::Application.routes.draw do
-  resources :users
-  resources :playlists
 
-  root :to  => "users#index"
+
+  devise_for :users
+
+  resources :playlists
+  resources :comments
+
+  root :to  => "playlists#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,3 +1,6 @@
-<h1><%= @playlist.link %></h1>
-<p>Playlist created: <%= @playlist.created_at.strftime("%m/%d/%y") %></p>
-<%= link_to "Back", playlists_path %>
+<h1><%= @playlist.title %></h1>
+<h2><%= @playlist.link.html_safe %></h2>
+<p>Created <%= @playlist.created_at.strftime("%m/%d/%y") %></p>
+<p>Author: <%= @playlist.user.full_name %></p>
+<%= link_to "Back", playlists_path %><br>
+<%= link_to "Add Comment", new_comment_path(@playlist) %>
