@@ -1,43 +1,47 @@
 class CommentsController < ApplicationController
+	before_filter :get_comment, only: [:show, :edit, :destroy]
 	before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
-	def index
-		@comments = Comment.all
-	end
-
-	def show
+	def get_comment
 		@comment = Comment.find(params[:id])
 	end
 
-	def new
-		@comment = Comment.new
+	def index
+		@comments = Comment.all
+		respond_to do |format|
+			format.html
+			format.json { render json: @comments}
+		end
+	end
+
+	def show
+		respond_to do |format|
+			format.html
+			format.json { render json: @comment}
+		end
+	end
+
+	def new		
+		@playlist = Playlist.find(params[:playlist_id])
+		@comment = current_user.comments.new
 	end
 
 	def create
-		@comment = Comment.new(params[:comment])
-		@comment.save
+		@playlist = Playlist.find(params[:playlist_id])
+		args = params[:comment].merge :playlist_id => params[:playlist_id]
+		@comment = current_user.comments.new(args)
 		if @comment.save
-			redirect_to playlists_path, :notice => "Comment added successfully"
+			redirect_to playlist_path(params[:playlist_id]), :notice => "Comment added successfully"
 		else
 			render 'new'
 		end
 	end
 
 	def edit
-		@comment = Comment.find(params[:id])
-	end
-
-	def update
-		if @comment.update_attributes(params[:comment])
-			redirect_to comments_path, :notice => "Comment has been updated"
-		else
-			render 'edit'
-		end
 	end
 
 	def destroy
-		@comment = Comment.find(params[:id])
 		@comment.destroy
-		redirect_to comments_path, :notice => "Comment has been deleted"
+		redirect_to playlists_path, :notice => "Comment has been deleted"
 	end
 end

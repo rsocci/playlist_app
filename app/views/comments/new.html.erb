@@ -1,6 +1,6 @@
 <h1>New Comment</h1>
 
-<%= form_for @comment do |f| %>
+<%= form_for [@playlist, @comment] do |f| %>
 	<% if @comment.errors.any? %>
 		<h2>Errors:</h2>
 		<ul>
@@ -14,7 +14,7 @@
 		<%= f.label :content %><br>
 		<%= f.text_area :content %>
 	</p>
-	
+
 	<p><%= f.submit "Add" %></p>
 
 <% end %>
