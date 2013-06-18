@@ -1,19 +1,40 @@
-<h1><%= @playlist.title %></h1>
+<div class="page-header">
+	<h1><%= @playlist.title %></h1>
+</div>
 <p><%= @playlist.link.html_safe %></p>
-<p>Created <%= @playlist.created_at.strftime("%m/%d/%Y") %></p>
-<p>Author: <%= @playlist.user.full_name %></p>
+
+<p><em>Submitted <%= @playlist.created_at.strftime("%m/%d/%Y") %> by <%= @playlist.user.full_name %></em></p>
 
 <% if @comments.any? %>
-	<h2>Comments</h2>
+	<h3>Comment</h3>
 <% end %>
-<% @comments.each do |comment| %>
-	<% if comment.playlist_id == @playlist.id %>
-		<h4><%= User.find(comment.user_id).full_name %></h4>
-		<p><%= comment.created_at.strftime("%m/%d/%Y %l:%M %p %Z") %></p>
-		<p><%= comment.content %></p>
-		<hr>
+
+<% if current_user %>
+	<%= form_for [@playlist, @comment] do |f| %>
+		<% if @comment.errors.any? %>
+			<h2>Errors:</h2>
+			<ul>
+				<% @comment.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+				<% end %>
+			</ul>
+		<% end %>
+
+		<p>
+			<%= f.text_area :content %>
+		</p>
+
+		<p><%= f.submit "Submit", class: "btn" %></p>
+
 	<% end %>
 <% end %>
 
-<%= link_to "Back", playlists_path %><br>
-<%= link_to "Add Comment", new_playlist_comment_path(@playlist) %>
+<% @comments.each do |comment| %>
+	<% if comment.playlist_id == @playlist.id %>
+		<div class="comment">
+			<h5><%= User.find(comment.user_id).full_name %> <span class="time"><%= time_ago_in_words(comment.created_at) + " ago" %></span></h5>
+			<p><%= comment.content %></p>
+			<hr>
+		</div>	
+	<% end %>
+<% end %>

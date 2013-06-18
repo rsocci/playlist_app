@@ -1,28 +1,31 @@
-<h1>Create New Playlist</h1>
+<div class="page-header">
+	<h1>Create New Playlist</h1>
+</div>
 
 <%= form_for @playlist do |f| %>
-	<% if @playlist.errors.any? %>
-		<h2>Errors:</h2>
-		<ul>
-			<% @playlist.errors.full_messages.each do |msg| %>
-			<li><%= msg %></li>
-			<% end %>
-		</ul>
-	<% end %>
+	<div class="errormsg">
+		<% if @playlist.errors.any? %>
+			<h3>Errors:</h3>
+			<ul>
+				<% @playlist.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+				<% end %>
+			</ul>
+		<% end %>
+	</div>	
 
-	<p>
-		<%= f.label :title %><br>
-		<%= f.text_field :title %>
-	</p>
-	<p>
-		<%= f.label :link %><br>
-		<%= f.text_field :link %>
-	</p>
-
-	<p><%= f.submit "Create" %></p>
-
+	<div class="new_playlist">
+		<p>
+			<%= f.label :title %><br>
+			<%= f.text_field :title %>
+		</p>
+		<p>
+			<%= f.label :link %><br>
+			<%= f.text_field :link %>
+		</p>
+		<p><%= f.submit "Create", class: "btn" %></p>
+	</div>
+	
 <% end %>
-
-<%= link_to "Back", playlists_path %>
 
 

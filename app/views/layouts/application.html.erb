@@ -7,38 +7,44 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="nav">
-		<ul>
-			<% if user_signed_in? %>
-				<li>
-					<%= link_to current_user.full_name, edit_user_registration_path %>
-				</li>
-				<li>
-					<%= link_to "Log Out", logout_path %>
-				</li>
-			<% else %>
-				<li>
-					<%= link_to "Register", register_path %>
-				</li>
-				<li>
-					<%= link_to "Log In", login_path %>
-				</li>
-			<% end %>
-		</ul>
+
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+				<ul class="nav">
+					<li><%= link_to "Playlists", playlists_path %></li>
+				</ul>
+				<ul class="nav pull-right">
+					<% if user_signed_in? %>
+						<li>
+							<%= link_to current_user.full_name, edit_user_registration_path %>
+						</li>
+						<li>
+							<%= link_to "Log Out", logout_path %>
+						</li>
+					<% else %>
+						<li>
+							<%= link_to "Register", register_path %>
+						</li>
+						<li>
+							<%= link_to "Log In", login_path %>
+						</li>
+					<% end %>
+				</ul>
+				</div>
+			</div>
+		</div>
+	<div class="container">		
+		<% flash.each do |key, value| %>
+			<div class="alert">
+				<button class="close" data-dismiss="alert">x</button>
+				<p><%= value %></p>
+			</div>
+		 
+		<% end %>
+
+		<%= yield %>
 	</div>
-
-<% flash.each do |key, value| %>
-	<div class="alert">
-		<p><%= value %></p>
-	</div>
- 
-<% end %>
-
-<!--<p class="notice"><erb= notice %></p>
-<p class="alert"><erb= alert %></p> -->
-
-
-<%= yield %>
 
 </body>
 </html>

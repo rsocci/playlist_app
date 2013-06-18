@@ -1,9 +1,6 @@
 <div class="page-header">
 	<h1>Playlists</h1>
-	<p>
-		<button class="btn" type="button"><i class="icon-plus"></i>     
-		<%= link_to "Create New Playlist", new_playlist_path %></button>
-	<p>
+	<%= button_to "Create New Playlist", new_playlist_path, method: :get, class: 'btn' %>
 </div>
 
 <% @playlists.each do |playlist| %>
@@ -14,9 +11,13 @@
 			<li> <%= link_to raw('<i class="icon-thumbs-down"></i>'), playlists_path %> </li>
 		</div>
 		<strong><%= link_to playlist.title, playlist %> </strong>
-		<span class="trash">
-			<%= link_to raw('<i class="icon-trash"></i>'), playlist, method: :delete, data: { confirm: 'Are you sure?'} %> 
-		</span>
+		<% if user_signed_in? %>
+			<% if current_user.full_name == playlist.user.full_name %>
+			<span class="trash">
+				<%= link_to raw('<i class="icon-trash"></i>'), playlist, method: :delete, data: { confirm: 'Are you sure?'} %> 
+			</span>
+			<% end %>
+		<% end %>
 	</div>
 	<p id="timeago">Submitted <%= time_ago_in_words(playlist.created_at) + " ago" %> </p>
 

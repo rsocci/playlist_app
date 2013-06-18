@@ -1,3 +1,101 @@
 // Place all the styles related to the playlists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.navbar .nav > li {
+	font-size: 17px;
+}
+
+.votes li {
+	list-style-type: none;
+	float: left;
+	margin-right: 3px;
+}
+
+.container .nav > li > a {
+	padding: 10px 30px 10px 0px;
+}
+
+.playlist {
+	p {
+		margin: 5px;
+	}
+	.trash {
+		display: none;
+		padding-left: 5px;
+	}
+}
+
+.title > strong {
+	a {
+		margin-left: 10px;
+		font-size: 18px;
+		color: #81b71a;
+	}
+	a:hover {
+		color: #527410;
+		text-decoration: none;
+	}
+}
+
+#timeago {
+	font-style: italic;
+	color: #777777;
+	font-size: 12px;
+}
+
+.btn {
+	a {
+		color: #777777;
+	}
+	a:hover {
+		text-decoration: none;
+	}
+}
+
+.playlist:hover .trash {
+	display: inline;
+}
+
+.new_playlist > p > label {
+	margin-bottom: -10px;
+}
+
+p > em {
+	color: #777777;
+	font-size: 12px;
+
+}
+
+h3, h5 {
+	color: #5a5a5a;
+}
+
+textarea {
+	width: 600px;
+	height: 120px;
+	resize: none;
+}
+
+.time {
+	font-size: 12px;
+	font-weight: normal;
+	padding-left: 4px;
+}
+
+.time:before {
+	content: "("
+}
+
+.time:after {
+	content: ")"
+}
+
+.comment p {
+	color: #5a5a5a;
+}
+
+.button_to {
+	padding-top: 10px;
+}

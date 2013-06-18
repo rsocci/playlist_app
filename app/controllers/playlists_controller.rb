@@ -8,39 +8,33 @@ class PlaylistsController < ApplicationController
 
 	def index
 		@playlists = Playlist.all
-
 		respond_to do |format|
 			format.html
-			format.json { render json: @playlists}
+			format.js
 		end
 	end
 
 
 	def show
 		@comments = Comment.where("playlist_id = ?", params[:id])
-		respond_to do |format|
-			format.html
-			format.json { render json: @playlist}
+		if current_user
+			@comment = current_user.comments.new
 		end
 	end
 
 
 	def new
 		@playlist = Playlist.new
-		respond_to do |format|
-			format.html
-			format.json { render json: @playlist}
-		end
 	end
 
 
 	def create 
-		@playlist = current_user.playlists.new(params[:playlist])
-		p_author = @playlist.link.scan(/user[:\/](.+)[\/:]playlist/)
-		p_id = @playlist.link.scan(/[a-zA-Z0-9]{22}/)
+		p_author = params[:playlist][:link].scan(/user[:\/](.+)[\/:]playlist/)
+		p_id = params[:playlist][:link].scan(/[a-zA-Z0-9]{22}/)
 		embedded_link = Playlist.create_embedded_link(p_author, p_id)
+		args = params[:playlist].merge(:p_id => p_id, :link => embedded_link)
+		@playlist = current_user.playlists.new(args)
 		if @playlist.save
-			@playlist.update_attributes(:p_id => p_id, :link => embedded_link)
 			redirect_to playlists_path, :notice => "New Playlist Added"
 		else
 			render 'new'

@@ -11,3 +11,50 @@
  *= require_self
  *= require_tree .
  */
+
+
+body {
+	padding-top: 40px;
+}
+
+.page-header > h1 {
+	color: #5a5a5a;
+}
+
+.page-header {
+	margin: 20px 0 30px;
+}
+
+input[type="submit"] {
+	color: #6b6b6b;
+}
+
+label {
+	color: #5a5a5a;
+}
+
+.hint {
+	font-size: 12px;
+	margin-top: -5px;
+	margin-bottom: -5px;
+}
+
+.field {
+	margin: 0 0 10px;
+}
+
+.fieldbox {
+	margin-top: -10px;
+}
+
+body a:hover {
+	text-decoration: none;
+}
+
+.remember {
+	padding-bottom: 10px;
+}
+#user_remember_me {
+	float: left;
+	width: 17px;
+}

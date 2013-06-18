@@ -8,17 +8,10 @@ class CommentsController < ApplicationController
 
 	def index
 		@comments = Comment.all
-		respond_to do |format|
-			format.html
-			format.json { render json: @comments}
-		end
 	end
 
 	def show
-		respond_to do |format|
-			format.html
-			format.json { render json: @comment}
-		end
+
 	end
 
 	def new		
@@ -27,7 +20,6 @@ class CommentsController < ApplicationController
 	end
 
 	def create
-		@playlist = Playlist.find(params[:playlist_id])
 		args = params[:comment].merge :playlist_id => params[:playlist_id]
 		@comment = current_user.comments.new(args)
 		if @comment.save
