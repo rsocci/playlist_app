@@ -60,4 +60,8 @@ class PlaylistsController < ApplicationController
 		end
 	end
 
+	def vote
+		playlist = Playlist.find(params[:id])
+		redirect_to playlists_path
+	end
 end
