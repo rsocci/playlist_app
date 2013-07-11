@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
 
   validates :first_name, presence: true, :length => { :maximum => 30}
   validates :last_name, presence: true, :length => { :maximum => 30}
- 
+  validates :email, presence: true, uniqueness: true 
 
   def full_name
-  	first_name + " " + last_name
+    "#{first_name} #{last_name}"
   end
 end

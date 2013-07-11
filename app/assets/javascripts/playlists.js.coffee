@@ -3,5 +3,23 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-	$('.title').hover (event) ->
-		$(this).toggleClass("hover")
+	# Attach event handlers to all up/down links
+
+	$('a.vote-link').on 'click', (e) ->
+		e.preventDefault()
+
+		return if $(@).hasClass 'fade'
+
+		voteType = $(@).data 'type'
+		playlistPath = $(@).attr 'href'
+		votePath = "#{playlistPath}/vote"
+
+		$.ajax
+			url: votePath
+			data: voteType:voteType
+			type: 'POST'
+			success: =>
+				$votesContainer = $(@).parents('.votes')
+				$votesContainer.find('a.vote-link').removeClass 'fade'
+				$(@).addClass 'fade'
+

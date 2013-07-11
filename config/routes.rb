@@ -15,7 +15,7 @@ PlaylistApp::Application.routes.draw do
 
   root :to  => "playlists#index"
 
-  match '/playlists/:id/vote' => 'playlists#vote', :via => :post  
+  match '/playlists/:id/vote' => 'playlists#vote', :via => :post   
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

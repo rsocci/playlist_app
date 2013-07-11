@@ -7,7 +7,7 @@ class PlaylistsController < ApplicationController
 	end
 
 	def index
-		@playlists = Playlist.all
+		@playlists = Playlist.order("score DESC")
 		respond_to do |format|
 			format.html
 			format.js
@@ -29,10 +29,11 @@ class PlaylistsController < ApplicationController
 
 
 	def create 
-		p_author = params[:playlist][:link].scan(/user[:\/](.+)[\/:]playlist/)
-		p_id = params[:playlist][:link].scan(/[a-zA-Z0-9]{22}/)
-		embedded_link = Playlist.create_embedded_link(p_author, p_id)
-		args = params[:playlist].merge(:p_id => p_id, :link => embedded_link)
+		# p_author = params[:playlist][:link].scan(/user[:\/](.+)[\/:]playlist/)
+		# p_id = params[:playlist][:link].scan(/[a-zA-Z0-9]{22}/)
+		# embedded_link = Playlist.create_embedded_link(p_author, p_id)
+		# args = params[:playlist].merge(:p_id => p_id, :link => embedded_link)
+		args = Playlist.setup_args(params)
 		@playlist = current_user.playlists.new(args)
 		if @playlist.save
 			redirect_to playlists_path, :notice => "New Playlist Added"
@@ -61,7 +62,12 @@ class PlaylistsController < ApplicationController
 	end
 
 	def vote
-		playlist = Playlist.find(params[:id])
-		redirect_to playlists_path
+		@playlist = Playlist.find(params[:id])
+		if params[:voteType] == "up"
+			@playlist.update_attributes( :score => (@playlist.score.to_i + 1))
+		end
+		if params[:voteType] == "down"
+			@playlist.update_attributes( :score => (@playlist.score.to_i - 1))
+		end
 	end
 end

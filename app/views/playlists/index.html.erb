@@ -7,8 +7,8 @@
 <div class="playlist">
 	<div class="title">
 		<div class="votes">
-			<li> <%= link_to raw('<i class="icon-thumbs-up"></i>'), { :action => 'vote', :id => playlist.id}, method: :post %> </li>
-			<li> <%= link_to raw('<i class="icon-thumbs-down"></i>'), { :action => 'vote', :id => playlist.id}, method: :post %> </li>
+			<li> <%= link_to raw('<i class="icon-thumbs-up"></i>'), playlist, class: "vote-link", data: { type: "up"} %> </li>
+			<li> <%= link_to raw('<i class="icon-thumbs-down"></i>'), playlist, class: "vote-link", data: { type: "down" }%> </li>
 		</div>
 		<strong><%= link_to playlist.title, playlist %> </strong>
 		<% if user_signed_in? %>
