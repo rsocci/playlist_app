@@ -3,11 +3,12 @@ class Playlist < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
 
-  validates :link, presence: true, :uniqueness => { :message => "has already been submitted"},
+  validates :title, presence: true, :length => { :maximum => 30 }
+  validates :link, presence: true, :uniqueness => { :message => "has already been submitted" },
   			format: {
-  				with: /^(spotify:user:|\<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify:user:|http:\/\/open\.spotify\.com\/user\/)/
+          with: /^(spotify:user:|\<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify:user:|http:\/\/open\.spotify\.com\/user\/)/,
+          allow_blank: true
   			}
-  validates :title, presence: true, :length => { :maximum => 30}
  
   def self.setup_args(params)
     p_author = params[:playlist][:link].scan(/user[:\/](.+)[\/:]playlist/)
@@ -15,7 +16,8 @@ class Playlist < ActiveRecord::Base
     unless p_author.empty? or p_id.empty?
       embedded_link = '<iframe src="https://embed.spotify.com/?uri=spotify:user:' + p_author.join + ':playlist:' + p_id.join + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>'
       params[:playlist].merge(:p_id => p_id, :link => embedded_link) 
+    else
+      params[:playlist]
     end
-    
   end
 end
