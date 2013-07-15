@@ -36,16 +36,14 @@ label {
 .hint {
 	font-size: 12px;
 	margin-top: -5px;
-	margin-bottom: -5px;
+	margin-bottom: 5px;
 }
 
 .field {
 	margin: 0 0 10px;
 }
 
-.fieldbox {
-	margin-top: -10px;
-}
+
 
 body a:hover {
 	text-decoration: none;

@@ -6,10 +6,10 @@
   <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
 
-  <div class="field"><%= f.label :password, "New password" %><br />
+  <div class="field"><%= f.label :password, "New password" %>
   <div class="fieldbox"><%= f.password_field :password, :autofocus => true %></div></div>
 
-  <div class="field"><%= f.label :password_confirmation, "Confirm new password" %><br />
+  <div class="field"><%= f.label :password_confirmation, "Confirm new password" %><
   <div class="fieldbox"><%= f.password_field :password_confirmation %></div></div>
 
   <div><%= f.submit "Change my password", class: "btn" %></div>

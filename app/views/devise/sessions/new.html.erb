@@ -3,10 +3,10 @@
 </div>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div class="field"><%= f.label :email %><br />
+  <div class="field"><%= f.label :email %>
   <div class="fieldbox"><%= f.email_field :email, :autofocus => true %></div></div>
 
-  <div class="field"><%= f.label :password %><br />
+  <div class="field"><%= f.label :password %>
   <div class="fieldbox"><%= f.password_field :password %></div></div>
 
   <% if devise_mapping.rememberable? -%>

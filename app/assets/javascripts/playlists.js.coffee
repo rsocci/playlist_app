@@ -23,3 +23,4 @@ $ ->
 				$votesContainer.find('a.vote-link').removeClass 'fade'
 				$(@).addClass 'fade'
 
+
